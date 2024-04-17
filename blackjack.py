@@ -1,58 +1,95 @@
-import os.path
 import pygame
+import sys
+import os.path
 from sys import exit
-from random import randint, choice
-
+from random import randint 
+# Initialize Pygame
 pygame.init()
 scriptDir = os.path.dirname(os.path.abspath(__file__))
 
-screen = pygame.display.set_mode((1280,640))
-pygame.display.set_caption("HABIBI BETS")
+# Define colours
+backgroundColour = (10, 10, 10)
+backgroundColour2 = ( 14, 59, 8)
+white = (255, 255, 255)
+black = (0, 0, 0)
 
-clock = pygame.time.Clock()
+# Set the dimensions of the screen
+screenWidth, screenHeight = 700, 500
+screenWidth2, screenHeight2 = 1000, 1000
+screen = pygame.display.set_mode((screenWidth, screenHeight))
 
-class Player(pygame.sprite.Sprite): #inheriting Sprite class
-    def __init__(self): #constructor
-        super().__init__()
-         
-#def startgame():   
-def button(x,y,w,h):
-    pos = pygame.mouse.get_pos()
-    click = pygame.mouse.get_pressed()
+# Set the caption of the screen
+pygame.display.set_caption('HABIBI BETS')
 
-    if pos[0] > x and pos[0] < x + w and pos[1] > y and pos[1] < y + h:
-       if click[0] == 1:
-         startgame()
-    pygame.draw.rect(screen, color, (x,y,w,h))
-def menu():
+# Create font objects
+font = pygame.font.Font(os.path.join(scriptDir, "font", "CasinoFont.ttf"), 40)
 
- while True:
+# User balance
+balance = 1000
 
-    surface.blit(background, (0, 0))
+# Function to display text on the screen
+def displayText(text, color, x, y):
+    textSurface = font.render(text, True, color)
+    screen.blit(textSurface, (x, y))
 
+# Function for start menu and bet input
+def startMenu():
+    screen.fill(backgroundColour)
+    displayText("Press SPACE to start", white, 50, 100)
+    pygame.display.flip()
+    waiting = True
+    while waiting:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    return
 
-    button(x,y,w,h)
+def get_bet():
+    screen.fill(backgroundColour)
+    displayText("Enter your bet (Balance: $"+str(balance)+"):", white, 20, 100)
+    pygame.display.flip()
+    bet = ""
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if bet.isdigit() and int(bet) <= balance:
+                        return int(bet)
+                elif event.key == pygame.K_BACKSPACE:
+                    bet = bet[:-1]
+                elif event.unicode.isdigit():
+                    bet += event.unicode
+        screen.fill(backgroundColour)
+        displayText("Enter your bet (Balance: $"+str(balance)+"): " + bet, white, 20, 100)
+        pygame.display.flip()
 
-    for event in pygame.event.get():
-       if event.type == pygame.QUIT:
-           pygame.quit()
-           sys.exit()
-    pygame.display.update()
-    
-        
-while True:
-    # Process player inputs.
+# Start menu and get bet
+startMenu()
+bet = get_bet()
+
+# Close the previous window
+pygame.display.quit()
+
+# Create a new window for the main game
+screen = pygame.display.set_mode((screenWidth2, screenHeight2))
+
+# Main game loop
+screen.fill(backgroundColour2)
+displayText("WELCOME TO HABIBI BETS BLACKJACK", white, 50, 50)
+displayText("Bet: " + str(bet), white, screenWidth2- 180 , screenHeight2-50 )
+pygame.display.flip()
+
+running = True
+while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            pygame.quit()
-            raise SystemExit
+            running = False
 
-    
-    
-    color = (30, 92, 58)
-    screen.fill(color)  # Fill the display with a solid color
-
-   
-
-    pygame.display.flip()  # Refresh on-screen display
-    clock.tick(60)         # wait until next frame (at 60 FPS)
+# Quit Pygame
+pygame.quit()
