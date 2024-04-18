@@ -3,36 +3,36 @@ import sys
 import os.path
 from sys import exit
 from random import randint 
-# Initialize Pygame
+# Initializes Pygame
 pygame.init()
 scriptDir = os.path.dirname(os.path.abspath(__file__))
 
-# Define colours
+# COLORS
 backgroundColour = (10, 10, 10)
 backgroundColour2 = ( 14, 59, 8)
 white = (255, 255, 255)
 black = (0, 0, 0)
 
-# Set the dimensions of the screen
+# Sets the dimensions of the screen
 screenWidth, screenHeight = 700, 500
 screenWidth2, screenHeight2 = 1000, 1000
 screen = pygame.display.set_mode((screenWidth, screenHeight))
 
-# Set the caption of the screen
+# Sets the caption 
 pygame.display.set_caption('HABIBI BETS')
 
-# Create font objects
+# Creates the font for the game
 font = pygame.font.Font(os.path.join(scriptDir, "font", "CasinoFont.ttf"), 40)
 
-# User balance
+# User set balance
 balance = 1000
 
-# Function to display text on the screen
+# Function to display the texts on the screen
 def displayText(text, color, x, y):
     textSurface = font.render(text, True, color)
     screen.blit(textSurface, (x, y))
 
-# Function for start menu and bet input
+# Function for start menu 
 def startMenu():
     screen.fill(backgroundColour)
     displayText("Press SPACE to start", white, 50, 100)
@@ -46,8 +46,9 @@ def startMenu():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     return
+# Function for betting menu 
 
-def get_bet():
+def getBet():
     screen.fill(backgroundColour)
     displayText("Enter your bet (Balance: $"+str(balance)+"):", white, 20, 100)
     pygame.display.flip()
@@ -71,12 +72,12 @@ def get_bet():
 
 # Start menu and get bet
 startMenu()
-bet = get_bet()
+bet = getBet()
 
-# Close the previous window
+# Closes the window for start menu and betting
 pygame.display.quit()
 
-# Create a new window for the main game
+# Creates a new window for the main game
 screen = pygame.display.set_mode((screenWidth2, screenHeight2))
 
 # Main game loop
@@ -91,5 +92,5 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-# Quit Pygame
+# Quits Pygame
 pygame.quit()
