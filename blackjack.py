@@ -14,7 +14,7 @@ white = (255, 255, 255)
 black = (0, 0, 0)
 
 # Sets the dimensions of the screen
-screenWidth, screenHeight = 700, 500
+screenWidth, screenHeight = 1000, 1000
 screenWidth2, screenHeight2 = 1000, 1000
 screen = pygame.display.set_mode((screenWidth, screenHeight))
 
@@ -22,7 +22,7 @@ screen = pygame.display.set_mode((screenWidth, screenHeight))
 pygame.display.set_caption('HABIBI BETS')
 
 # Creates the font for the game
-font = pygame.font.Font(os.path.join(scriptDir, "font", "CasinoFont.ttf"), 40)
+font = pygame.font.Font(os.path.join(scriptDir, "font", "CasinoFont.otf"), 40)
 
 # User set balance
 balance = 1000
@@ -35,7 +35,8 @@ def displayText(text, color, x, y):
 # Function for start menu 
 def startMenu():
     screen.fill(backgroundColour)
-    displayText("Press SPACE to start", white, 50, 100)
+    displayText("WELCOME TO HABIBI BETS BLACKJACK", white, 80, 70)
+    displayText("Press SPACE to start", white, 250, 700)
     pygame.display.flip()
     waiting = True
     while waiting:
@@ -82,15 +83,15 @@ screen = pygame.display.set_mode((screenWidth2, screenHeight2))
 
 # Main game loop
 screen.fill(backgroundColour2)
-displayText("WELCOME TO HABIBI BETS BLACKJACK", white, 50, 50)
-displayText("Bet: " + str(bet), white, screenWidth2- 180 , screenHeight2-50 )
+displayText("Bet: " + str(bet), white, screenWidth2- 200 , screenHeight2-50 )
 pygame.display.flip()
 
-running = True
-while running:
+gameActive = True
+while gameActive:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
+            gameActive = False
 
 # Quits Pygame
 pygame.quit()
+
