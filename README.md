@@ -1,2 +1,3 @@
-THIS IS HABIBI BET'S BLACKJACK starring Razeen Momin, Jacob Leipzig, Keith Egebe.
-wooooo
+THIS IS HABIBI BET'S BLACKJACK.
+Simple Blackjack game using pygame 
+Coders: Razeen, Jacob, Keith 
