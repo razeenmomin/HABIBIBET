@@ -8,6 +8,5 @@ Players receive all cards face up and the dealer's first card is face up and the
 3. Decide to either hit or stand
 4. If you hit and get higher than 21 you lose
 5. If you stand and the dealer gets a lower value of cards than you then you win
-6. 
 Source: https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.venetianlasvegas.com/casino/table-games/how-to-play-blackjack.html&ved=2ahUKEwi1y_HHhtmFAxUr38kDHeDAAAsQFnoECBgQAw&usg=AOvVaw2ZA-cU_HYb_RTcH_cpR2uo
 https://spicygame.itch.io/cards
