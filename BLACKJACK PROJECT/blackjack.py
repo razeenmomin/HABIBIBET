@@ -22,7 +22,7 @@ class Deck:
     def __init__(self):
         self.cards = []
 
-    # this method simply creates a deck using the Card class above
+    # this method creates a deck using the Card class 
     def createDeck(self):
         suits = ["Clubs", "Spades", "Hearts", "Diamonds"]
         for symbol in suits:
@@ -50,11 +50,11 @@ class Deck:
                 self.cards.append(newCard)
                 number += 1
 
-    # this method allows us to shuffle our deck so that it is randomly arranged
+    # this allows us to shuffle our deck so that it is randomly arranged
     def shuffleDeck(self):
         return random.shuffle(self.cards)
 
-    # this method basically gets the top card of the deck and returns it
+    # this method gets the top card of the deck and returns it
     def getCard(self):
         topCard = self.cards[0]
         self.cards.pop(0)
@@ -73,16 +73,16 @@ class Dealer:
         self.x = halfWidth
         self.y = 100
 
-    # this method creates the two-card hand that the dealer starts with
+    # this method creates the two cards that the dealer starts with
     def createDealerHand(self):
         for i in range(1, 3):
             self.addCard()
 
-    # this method uses the getCard() to deal a card to a player
+    # this method uses getCard to deal a card to a player
     def dealCard(self):
         return self.deck.getCard()
 
-    # this method allows the dealer to deal himself a card and also account for the dealer's count
+    # this method allows the dealer to deal himself a card 
     def addCard(self):
         dealerCard = self.dealCard()
         self.hand.append(dealerCard)
@@ -101,7 +101,7 @@ class Dealer:
         print("")
         print("Dealer's Count: " + str(self.count))
 
-    # this method considers all aces in a dealer's hand to give them the closest count under 21
+    # this method figures out the value of an ace based on the current hand 
     def countAce(self):
         if self.count <= 21:
             for card in self.hand:
@@ -111,7 +111,7 @@ class Dealer:
                         self.count -= 10
                         break
 
-    # this method will draw all the cards in a hand (13 : 20 Card Dimension Ratio)
+    # this method draws all the cards in a hand 
     def drawHand(self, surface):
         cardWidth, cardHeight = 78, 120
         cardGap = 20
@@ -155,7 +155,7 @@ class Player:
         self.y = 0
         self.currentTurn = False
 
-    # this method asks the player for their choice of action when it is their turn
+    # this asks the player for their choice when it is their turn
     def askChoice(self):
         inp = 0
         answered = False
@@ -172,7 +172,7 @@ class Player:
                     answered = True
         return inp
 
-    # this method adds a card provided by the dealer to the player's hand
+    # this method adds a card given by the dealer to the player's hand
     def addCard(self, card):
         self.hand.append(card)
         self.countCards()
@@ -191,7 +191,6 @@ class Player:
         print(str(self.name) + "'s Count: " + str(self.count))
 
     # this method will apply the outcome of the bet to the bank
-    # no negative parameter will ever need to passed as we have already subtracted the bet from the bank
     def applyBet(self, factor):
         self.bank += self.bet * factor
 
@@ -209,7 +208,7 @@ class Player:
         self.hand = []
         self.count = 0
 
-    # this method considers all aces in a player's hand to give them the closest count under 21
+    # this method finds the best vaule for the ace based on the current hand
     def countCards(self):
         self.count = 0
         for card in self.hand:
@@ -221,7 +220,7 @@ class Player:
                     self.count -= 10
                     break
 
-    # this method will draw all the cards in a hand (13 : 20 Card Dimension Ratio)
+    # this method will draw all the cards in a hand
     def drawHand(self, surface):
         cardWidth, cardHeight = 78, 120
         cardGap = 20
@@ -260,7 +259,6 @@ class Player:
         self.resetHandAndCount()
 
 
-# officially the end of all our class initializations and methods
 
 
 # below consists the py-game/graphics related code
@@ -398,11 +396,6 @@ def fixCoordinates():
 
 # function to collect the bets of all the players every round
 def getPlayerBets():
-    # for player in players:
-    #     player.createBet()
-    # for player in players:
-    #     player.bet = 5
-    #     player.applyBet(-1)
     global players, numPlayers
     pygame.init()
     screen = pygame.display.set_mode((screenWidth, screenHeight))
@@ -463,8 +456,7 @@ def createHands():
             card = dealer.dealCard()
             player.addCard(card)
 
-# function to check for blackjacks (basically when the first two initial cards dealt to a player add up to 21)
-# if there is one you automatically win one and a half times your bet, and you sit out for the round
+# function to check for blackjacks
 def checkBlackJack():
     for player in players:
         if player.count == 21:
@@ -474,7 +466,7 @@ def checkBlackJack():
             player.resetBet()
             player.blackjack = True
 
-# function to run the turns of all players, basically allowing to hit and pass as normal
+# function to run the turns of the player, basically allowing to hit and pass as normal
 # this function also contains the code for changing the value of an ace when necessary
 def playTurns():
     pygame.init()
