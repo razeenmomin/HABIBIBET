@@ -169,7 +169,7 @@ class Player:
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_h:
                     inp = 1
                     answered = True
-                if event.type == pygame.KEYDOWN and event.key == pygame.K_p:
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_s:
                     inp = 2
                     answered = True
         return inp
@@ -240,7 +240,7 @@ class Player:
         nameColor = white
         if self.currentTurn:
             nameColor = blue
-            displayText("Hit(H) or Pass(P)", text_Normal, surface, self.x, self.y - (0.75 * cardHeight), nameColor)
+            displayText("Hit(H) or Stand(S)", text_Normal, surface, self.x, self.y - (0.75 * cardHeight), nameColor)
         if self.bust:
             bust = pygame.image.load("BLACKJACK PROJECT\pic\loseHabibi.png")
             bustWidth = bust.get_width()
